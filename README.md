@@ -2,7 +2,17 @@
 
 **Oase** is a premium, mobile-first web application designed to help families manage their wealth with peace of mind. It features multi-user support, detailed budgeting, expense tracking, and a clean, modern UI.
 
-![Oase Dashboard Preview](public/file.svg) *(Replace with actual screenshot)*
+![Oase Dashboard Preview](public/screenshots/dashboard.png)
+
+## 📸 Screenshots
+
+| Analytics | Budgets |
+|:---:|:---:|
+| ![Analytics](public/screenshots/analytics.png) | ![Budgets](public/screenshots/budget.png) |
+
+| Accounts | Reminders |
+|:---:|:---:|
+| ![Accounts](public/screenshots/accounts.png) | ![Reminders](public/screenshots/reminders.png) |
 
 ## ✨ Features
 
