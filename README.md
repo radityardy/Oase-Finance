@@ -14,15 +14,23 @@
 |:---:|:---:|
 | ![Accounts](public/screenshots/accounts.png) | ![Reminders](public/screenshots/reminders.png) |
 
+## 📚 Documentation
+
+For detailed information, please refer to the following documentation in the `docs/` folder:
+
+-   [**Authentication System**](docs/AUTHENTICATION.md): Details on the sliding overlay and mobile animations.
+-   [**Architecture**](docs/ARCHITECTURE.md): Project structure, tech stack, and database schema.
+-   [**Deployment Guide**](docs/DEPLOYMENT.md): How to deploy to Vercel and set up PocketBase.
+
 ## ✨ Features
 
-- **Authentication**: Secure login and registration system.
-- **Dashboard**: Real-time overview of total balance, recent transactions, and spending breakdown.
-- **Transaction Management**: Record income, expenses, and transfers with ease.
-- **Analytics & Reports**: Visual charts (Bar, Pie) to track spending trends daily, weekly, or monthly.
-- **Budgets**: Set spending limits for specific categories and track progress.
-- **Multi-User**: Dedicated accounts for family members (Admin/Member roles).
-- **Responsive Design**: Optimized for both desktop and mobile devices.
+-   **Modern Authentication**: Premium sliding overlay design with bi-directional mobile transitions.
+-   **Dashboard**: Real-time overview of total balance, recent transactions, and spending breakdown.
+-   **Transaction Management**: Record income, expenses, and transfers with ease.
+-   **Analytics & Reports**: Visual charts (Bar, Pie) to track spending trends daily, weekly, or monthly.
+-   **Budgets**: Set spending limits for specific categories and track progress.
+-   **Multi-User**: Dedicated accounts for family members (Admin/Member roles).
+-   **Responsive Design**: Optimized for both desktop and mobile devices.
 
 ## 🛠 Tech Stack
 
