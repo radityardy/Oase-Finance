@@ -97,6 +97,13 @@ export default function LoginPage() {
           >
             {loading ? "Please wait..." : "Sign In"}
           </button>
+
+          <div className="mt-6 text-xs text-slate-500 md:hidden text-center">
+            Don't have an account?{" "}
+            <Link href="/register" className="font-bold text-primary-600 hover:text-primary-700 hover:underline">
+              Sign Up
+            </Link>
+          </div>
         </div>
       </form>
     </div>
