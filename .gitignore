@@ -38,6 +38,7 @@ DEBUG_RULES.md
 DEBUG_TRANSACTIONS.md
 DEBUG_USERS.md
 SCHEMA_CHECKLIST.md
+.gitignore
 
 # vercel
 .vercel

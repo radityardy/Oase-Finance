@@ -24,12 +24,9 @@ export default function LoginPage() {
       const authData = await pb.collection("users").authWithPassword(email, password);
       console.log("Login Success:", authData);
       
-      // Explicitly set cookie (secure: false for localhost is CRITICAL)
       const cookieStr = pb.authStore.exportToCookie({ httpOnly: false, secure: false });
-      console.log("Setting Cookie:", cookieStr);
       document.cookie = cookieStr;
       
-      // Force full reload to ensure middleware sees the cookie
       window.location.href = "/";
       
     } catch (err: any) {
@@ -42,75 +39,66 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-4">
-      <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-8 shadow-xl ring-1 ring-slate-900/5">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-primary-900">
-            Welcome back
-          </h2>
-          <p className="mt-2 text-sm text-slate-500">
-            Sign in to your Oase account
-          </p>
+    <div className="w-full max-w-sm space-y-6 text-center">
+      <div>
+        <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+          Sign in
+        </h2>
+        <div className="flex justify-center gap-4 mt-4">
+             {/* Social Icons Placeholder - matching design */}
+             <button type="button" className="border border-slate-200 rounded-full p-2 hover:bg-slate-50 transition">
+                <span className="sr-only">Google</span>
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .533 5.347.533 12s5.333 12 11.947 12c3.48 0 6.147-1.147 7.947-3.04 1.827-1.827 2.32-4.48 2.32-6.507 0-.587-.04-1.213-.107-1.533H12.48z" />
+                </svg>
+             </button>
+             {/* Add other icons if needed */}
         </div>
-
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-          <div className="-space-y-px rounded-md shadow-sm">
-            <div>
-              <input
-                name="email"
-                type="email"
-                required
-                className={cn(
-                  "relative block w-full rounded-t-md border-0 py-3 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6",
-                  "bg-white"
-                )}
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <input
-                name="password"
-                type="password"
-                required
-                className={cn(
-                    "relative block w-full rounded-b-md border-0 py-3 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6",
-                    "bg-white"
-                  )}
-                placeholder="Password"
-              />
-            </div>
-          </div>
-
-          {error && (
-            <div className="text-sm font-medium text-red-500 text-center">
-              {error}
-            </div>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className={cn(
-                "group relative flex w-full justify-center rounded-lg bg-primary-600 px-3 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600",
-                loading && "opacity-70 cursor-not-allowed"
-              )}
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </button>
-          </div>
-        </form>
-
-        <p className="text-center text-sm text-slate-500">
-          Not a member?{" "}
-          <Link
-            href="/register"
-            className="font-semibold leading-6 text-primary-600 hover:text-primary-500"
-          >
-            Start a family
-          </Link>
-        </p>
+        <p className="mt-4 text-xs text-slate-400">or use your email account</p>
       </div>
+
+      <form className="space-y-4" onSubmit={handleLogin}>
+          <div>
+            <input
+              name="email"
+              type="email"
+              required
+              className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="Email"
+            />
+          </div>
+          <div>
+            <input
+              name="password"
+              type="password"
+              required
+              className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="Password"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <a href="#" className="text-xs text-slate-500 hover:text-slate-800">Forgot your password?</a>
+          </div>
+
+        {error && (
+          <div className="text-sm font-medium text-red-500 text-center">
+            {error}
+          </div>
+        )}
+
+        <div>
+          <button
+            type="submit"
+            disabled={loading}
+            className={cn(
+              "w-full rounded-full bg-primary-600 px-8 py-3 text-xs font-bold uppercase tracking-wider text-white transition-transform active:scale-95 hover:bg-primary-700 disabled:opacity-70 disabled:cursor-not-allowed"
+            )}
+          >
+            {loading ? "Please wait..." : "Sign In"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -30,27 +30,20 @@ export default function RegisterPage() {
     }
 
     try {
-      // 1. Create User
       const user = await pb.collection("users").create({
         email,
         password,
         passwordConfirm,
         name,
-        role: "admin" // First user is always admin
+        role: "admin"
       });
 
-      // 2. Auth as User to create Family (assuming rules allow it or we lift restrictions)
-      // Actually, standard flow: Create Family -> Update User with Family ID.
-      // But we need to be authed to create family usually.
-      // Solution: Auth first, then create family, then update self.
-      
       await pb.collection("users").authWithPassword(email, password);
 
       const family = await pb.collection("families").create({
         name: familyName,
       });
 
-      // 3. Update User with Family ID
       await pb.collection("users").update(user.id, {
         family_id: family.id
       });
@@ -68,114 +61,87 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-surface-subtle p-4">
-      <div className="w-full max-w-md space-y-8 rounded-2xl bg-surface p-8 shadow-xl ring-1 ring-slate-900/5">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-primary-900">
-            Create your Oase
+    <div className="w-full max-w-sm space-y-6 text-center">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+            Create Account
           </h2>
-          <p className="mt-2 text-sm text-slate-500">
-            Start managing your family finances today
-          </p>
+          <div className="flex justify-center gap-4 mt-4">
+               {/* Social Icons Placeholder */}
+               <button type="button" className="border border-slate-200 rounded-full p-2 hover:bg-slate-50 transition">
+                  <span className="sr-only">Google</span>
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .533 5.347.533 12s5.333 12 11.947 12c3.48 0 6.147-1.147 7.947-3.04 1.827-1.827 2.32-4.48 2.32-6.507 0-.587-.04-1.213-.107-1.533H12.48z" />
+                  </svg>
+               </button>
+          </div>
+          <p className="mt-4 text-xs text-slate-400">or use your email for registration</p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleRegister}>
-            {/* Same fields as before */}
-            {/* Family Name */}
+        <form className="space-y-4" onSubmit={handleRegister}>
             <div>
-              <label htmlFor="familyName" className="block text-sm font-medium leading-6 text-slate-900">
-                Family Name
-              </label>
-              <div className="mt-2">
                 <input
                   id="familyName"
                   name="familyName"
                   type="text"
                   required
-                  className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 bg-white"
-                  placeholder="The Smiths"
+                  className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="Family Name"
                 />
-              </div>
             </div>
 
-            {/* User Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-slate-900">
-                Your Name
-              </label>
-              <div className="mt-2">
                 <input
                   id="name"
                   name="name"
                   type="text"
                   required
-                  className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 bg-white"
-                  placeholder="John Doe"
+                  className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="Your Name"
                 />
-              </div>
             </div>
 
-            {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-slate-900">
-                Email address
-              </label>
-              <div className="mt-2">
                 <input
                   id="email"
                   name="email"
                   type="email"
                   required
-                  className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 bg-white"
-                  placeholder="john@example.com"
+                  className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="Email"
                 />
-              </div>
             </div>
 
-             {/* Password */}
              <div>
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-slate-900">
-                Password (min 8 chars)
-              </label>
-              <div className="mt-2">
                 <input
                   id="password"
                   name="password"
                   type="password"
                   required
                   minLength={8}
-                  className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 bg-white"
+                  className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="Password"
                 />
-              </div>
             </div>
 
-             {/* Password Confirm */}
              <div>
-              <label htmlFor="passwordConfirm" className="block text-sm font-medium leading-6 text-slate-900">
-                Confirm Password
-              </label>
-              <div className="mt-2">
                 <input
                   id="passwordConfirm"
                   name="passwordConfirm"
                   type="password"
                   required
                   minLength={8}
-                  className="block w-full rounded-md border-0 py-2.5 px-3 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6 bg-white"
+                  className="w-full rounded-md border-none bg-slate-100 px-4 py-3 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  placeholder="Confirm Password"
                 />
-              </div>
             </div>
 
           {error && (
             <div className="rounded-md bg-red-50 p-4">
-              <div className="flex">
-                <div className="ml-3">
                   <h3 className="text-sm font-medium text-red-800">Registration Failed</h3>
                   <div className="mt-2 text-sm text-red-700">
                     <p>{error}</p>
                   </div>
-                </div>
-              </div>
             </div>
           )}
 
@@ -184,25 +150,13 @@ export default function RegisterPage() {
               type="submit"
               disabled={loading}
               className={cn(
-                "group relative flex w-full justify-center rounded-lg bg-primary-600 px-3 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600",
-                loading && "opacity-70 cursor-not-allowed"
+                "w-full rounded-full bg-primary-600 px-8 py-3 text-xs font-bold uppercase tracking-wider text-white transition-transform active:scale-95 hover:bg-primary-700 disabled:opacity-70 disabled:cursor-not-allowed"
               )}
             >
-              {loading ? "Creating Account..." : "Register"}
+              {loading ? "Creating Account..." : "Sign Up"}
             </button>
           </div>
         </form>
-
-        <p className="text-center text-sm text-slate-500">
-          Already have an account?{" "}
-          <Link
-            href="/login"
-            className="font-semibold leading-6 text-primary-600 hover:text-primary-500"
-          >
-            Sign in
-          </Link>
-        </p>
-      </div>
     </div>
   );
 }
